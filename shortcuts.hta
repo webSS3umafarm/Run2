@@ -63,19 +63,20 @@ Dim shortcut(6) ' shortcut(s) array
 	Sub Window_OnLoad
  ' window resize: width, height. 
 window.resizeTo 220, document.body.scrollHeight
+	 call scLoop()
 	end Sub
 
+	Sub scLoop()
+Dim i
+	on Error Resume Next
+ For i = 1 To 6
+  shortcut(i) = oShell.RegRead("HKCU\Software\Run2\Path" & i)
+  document.getElementById("shortcut" &i).value = i
+ Next 
+	end Sub
+' this loop is in a sub to save memory and go fast (blazing) on load. 
 
-' RUNTwo = document.getElementById("shortcut" & Right("shortcut2", 1)).value
-' oApp.ShellExecute RUNTwo, "", "", "open", 1
 
-' shortcut1 = document.getElementById("shortcut1").value
 
-' document.getElementById("shortcut1").value = shortcut1
-
-	
-	
-
- oShell.RegWrite "HKEY_CURRENT_USER\Software\MyTestApp\Settings", 1, "REG_DWORD"
 
 </script>
